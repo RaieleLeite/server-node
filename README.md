@@ -1,11 +1,109 @@
-#RF (Requisitos Funcionais)
-- [ ] O usuário deve poder criar uma nova transação;
-- [ ] O usuário deve poder obter um resumo da sua conta;
-- [ ] O usuário deve poder listar todas transações que já ocorreram;
-- [ ] O usuário deve poder visualizar uma transação única;
+# 💸 API de Transações (Node.js + Fastify)
 
+Uma API REST para gerenciamento de transações financeiras, desenvolvida com **Node.js**, **Fastify** e **Knex**.
 
-#RN (Requisitos de Negócio)
-- [ ] A transação pode ser do tipo crédito que somará ao valor total, ou débito subtrairá;
-- [ ] Deve ser possível identificarmos o usuário entre as requisições;
-- [ ] O usuário só pode visualizar transações o qual ele criou;
+---
+
+## 🚀 Tecnologias utilizadas
+
+* Node.js
+* Fastify
+* Knex.js
+* SQLite (ambiente de desenvolvimento)
+* Vitest
+* Supertest
+* Zod
+* TypeScript
+
+---
+
+## 📦 Funcionalidades
+
+* ✅ Criar uma nova transação
+* ✅ Listar todas as transações de uma sessão
+* ✅ Buscar uma transação específica
+* ✅ Obter resumo (saldo total)
+* ✅ Isolamento por sessão via cookies
+
+---
+
+## 🧪 Testes
+
+Para rodar os testes:
+
+```bash
+npm test
+```
+
+Os testes utilizam:
+
+* Vitest
+* Supertest
+
+---
+
+## 🔗 Rotas da API
+
+### Criar transação
+
+```http
+POST /transactions
+```
+
+```json
+{
+  "title": "Salário",
+  "amount": 5000,
+  "type": "credit"
+}
+```
+
+---
+
+### Listar transações
+
+```http
+GET /transactions
+```
+
+---
+
+### Buscar transação por ID
+
+```http
+GET /transactions/:id
+```
+
+---
+
+### Resumo
+
+```http
+GET /transactions/summary
+```
+
+---
+
+## 🍪 Sessão
+
+A API utiliza cookies para identificar o usuário:
+
+* Um `sessionId` é criado automaticamente
+* Cada usuário só acessa suas próprias transações
+
+---
+
+## 🧠 Regras de negócio
+
+* `credit` → valor positivo
+* `debit` → valor negativo
+* Resumo = soma total das transações
+
+---
+
+## 📌 Observações
+
+* Banco SQLite utilizado para desenvolvimento/testes
+* Migrations controladas com Knex
+* Validação de dados com Zod
+
